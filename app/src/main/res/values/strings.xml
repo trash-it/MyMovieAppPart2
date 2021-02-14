@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MyMovieApp</string>
+
+    <string name="menu_rated">Top Rated</string>
+    <string name="menu_popular">Most Popular</string>
+
+    <string name="tvTitle">Title:</string>
+    <string name="tvOriginalTitle">Original Title:</string>
+    <string name="tvReleaseDate">Release Date:</string>
+    <string name="tvAverage">Average Vote:</string>
+    <string name="tvPlot">Plot:</string>
+
+
+</resources>

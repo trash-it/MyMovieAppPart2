@@ -3,18 +3,23 @@ package com.example.mymovieapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
+
 
 /**
  * The type Movie detail activity.
@@ -33,6 +38,11 @@ public class MovieDetailActivity extends AppCompatActivity {
      */
     public static ArrayList<Movies> movies;
     private int position;
+    public static int trailerLenght;
+    public static String[] trailerKeys = trailerNames = new String[4];
+    public static String[] trailerNames = new String[4];
+
+
 
     /**
      * The constant MOVIE_BASE_URL.
@@ -44,6 +54,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView tvReleaseDate;
     private TextView tvAverage;
     private TextView tvPlot;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +69,39 @@ public class MovieDetailActivity extends AppCompatActivity {
             fillDetails(position);
             new getTrailersTask().execute();
 
+
+
         } else {
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
         }
 
 
+    }
+
+
+
+    private void addTrailers() {
+        final LinearLayout layoutTrailerList = (LinearLayout)findViewById(R.id.llTrailerList);
+        Log.d(TAG, "MyLog doInBackground addTrailers Start" + trailerKeys.length + trailerKeys[0]);
+        Log.d(TAG, "MyLog doInBackground addTrailers Start2 " + trailerNames.length + trailerNames[0]);
+        for (int i = 0; i < trailerLenght ; i++ ) {
+            Log.d(TAG, "MyLog doInBackground addTrailers trailer Nummer: " + i + " Name: " + trailerNames[i]);
+            Button button = new Button(this);
+            button.setText(trailerNames[i]);
+            final String youtubeLink = "https://www.youtube.com/watch?v=" + trailerKeys[i];
+            Log.d(TAG, "MyLog doInBackground youtubelink:  " + youtubeLink);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri youtubeUri = Uri.parse( youtubeLink);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, youtubeUri );
+                    if(intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+                }
+            });
+            layoutTrailerList.addView(button);
+        }
     }
 
 
@@ -94,15 +133,21 @@ public class MovieDetailActivity extends AppCompatActivity {
             Log.d(TAG, "MyLog doInBackground Trailer ULR"
                     + trailerRequestUrl);
             try {
-               String trailers =  NetworkUtils.getTrailers(trailerRequestUrl);
+               String trailers =  NetworkUtils.getTrailerStream(trailerRequestUrl);
                 Log.d(TAG, "MyLog doInBackground: TrailerStream"
                         + trailers);
+                NetworkUtils.parseTrailerJson(trailers);
+                Log.d(TAG, "MyLog doInBackground: Trailer Names und Keys " +trailerKeys[0] + trailerNames[0]);
             } catch (IOException e) {
                 e.printStackTrace();
-
             }
-
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            addTrailers();
         }
     }
 

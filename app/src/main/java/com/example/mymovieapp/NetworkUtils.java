@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.example.mymovieapp.MovieDetailActivity.trailerNames;
+
 /**
  * The type Network utils.
  */
@@ -103,7 +105,7 @@ public class NetworkUtils {
         }
     }
 
-    public static String getTrailers(String trailerUrl) throws IOException {
+    public static String getTrailerStream(String trailerUrl) throws IOException {
         URL url = new URL(trailerUrl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         InputStream inputStream = urlConnection.getInputStream();
@@ -155,6 +157,28 @@ public class NetworkUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void parseTrailerJson(String trailerStream) {
+        try {
+            JSONObject jsonTrailerObject = new JSONObject(trailerStream);
+            JSONArray resultsArray = jsonTrailerObject.getJSONArray("results");
+            Log.d(TAG, "MyLog NetworkUtils: parseTrailerJson länge " + resultsArray.length());
+            if ( resultsArray.length() < 5 ) {
+                MovieDetailActivity.trailerLenght = resultsArray.length();
+            } else {
+                MovieDetailActivity.trailerLenght = 4;
+            }
+            for (int i = 0; (i < resultsArray.length()) && (i < 5); i++) {
+                MovieDetailActivity.trailerKeys[i] = resultsArray.getJSONObject(i).optString("key");
+                MovieDetailActivity.trailerNames[i] = resultsArray.getJSONObject(i).optString("name");
+                Log.d(TAG, "MyLog NetworkUtils: parseTrailerJson " + i +  " Key: " + MovieDetailActivity.trailerKeys[i] + " Name: " + MovieDetailActivity.trailerNames[i]);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

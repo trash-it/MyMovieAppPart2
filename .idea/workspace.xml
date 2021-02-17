@@ -6,7 +6,8 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TrailerStream" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="doInBackground" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BranchesTreeState">
@@ -29,13 +30,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="150d9a1f-f9ec-4145-a7d7-18b84f2aceec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MovieDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MovieDetailActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/NetworkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/NetworkUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_detail.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,10 +152,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser" timestamp="1613322171578">
+    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser" timestamp="1613580611320">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser/0.0.3413.1400@0.0.3413.1400" timestamp="1613322171578" />
+    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser/0.0.3413.1400@0.0.3413.1400" timestamp="1613580611320" />
     <state x="534" y="440" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612969710868">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
@@ -166,5 +164,25 @@
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
     <state x="1892" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3413.1400@0.0.3413.1400" timestamp="1613321707786" />
+    <state width="1660" height="355" key="GridCell.Tab.0.bottom" timestamp="1613578232716">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="355" key="GridCell.Tab.0.bottom/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
+    <state width="1660" height="355" key="GridCell.Tab.0.center" timestamp="1613578232716">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="355" key="GridCell.Tab.0.center/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
+    <state width="1660" height="355" key="GridCell.Tab.0.left" timestamp="1613578232716">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="355" key="GridCell.Tab.0.left/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
+    <state width="1660" height="355" key="GridCell.Tab.0.right" timestamp="1613578232716">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="355" key="GridCell.Tab.0.right/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
+    <state x="523" y="319" width="672" height="678" key="search.everywhere.popup" timestamp="1613574255771">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state x="523" y="319" width="672" height="678" key="search.everywhere.popup/0.0.3413.1400@0.0.3413.1400" timestamp="1613574255770" />
   </component>
 </project>

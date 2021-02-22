@@ -106,11 +106,12 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             });
             layoutTrailerList.addView(button);
+            ;
         }
     }
 
     private void addReviews() {
-        final LinearLayout layoutReviewList = (LinearLayout)findViewById(R.id.llTrailerList);
+        final LinearLayout layoutReviewList = (LinearLayout)findViewById(R.id.llreviewList);
 
         for (int i = 0; i < reviews.length; i++){
             if(reviewAuthors[i] != null) {

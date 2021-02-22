@@ -9,13 +9,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static com.example.mymovieapp.MovieDetailActivity.trailerNames;
 
 /**
  * The type Network utils.
@@ -72,6 +69,7 @@ public class NetworkUtils {
         uri_builder.scheme("https")
                 .authority(base_url)
                 .appendPath("3")
+                .appendPath("movie")
                 .appendPath(id)
                 .appendPath("reviews")
                 .appendQueryParameter(api, api_key);
@@ -164,15 +162,15 @@ public class NetworkUtils {
             JSONObject jsonTrailerObject = new JSONObject(trailerStream);
             JSONArray resultsArray = jsonTrailerObject.getJSONArray("results");
             Log.d(TAG, "MyLog NetworkUtils: parseTrailerJson länge " + resultsArray.length());
-            if ( resultsArray.length() < 5 ) {
+            if (resultsArray.length() < 5) {
                 MovieDetailActivity.trailerLenght = resultsArray.length();
             } else {
                 MovieDetailActivity.trailerLenght = 4;
             }
-            for (int i = 0; (i < resultsArray.length()) && (i < 5); i++) {
+            for (int i = 0; (i < resultsArray.length()) && (i < 4); i++) {
                 MovieDetailActivity.trailerKeys[i] = resultsArray.getJSONObject(i).optString("key");
                 MovieDetailActivity.trailerNames[i] = resultsArray.getJSONObject(i).optString("name");
-                Log.d(TAG, "MyLog NetworkUtils: parseTrailerJson " + i +  " Key: " + MovieDetailActivity.trailerKeys[i] + " Name: " + MovieDetailActivity.trailerNames[i]);
+                Log.d(TAG, "MyLog NetworkUtils: parseTrailerJson " + i + " Key: " + MovieDetailActivity.trailerKeys[i] + " Name: " + MovieDetailActivity.trailerNames[i]);
             }
 
         } catch (JSONException e) {
@@ -182,7 +180,40 @@ public class NetworkUtils {
     }
 
 
+    public static String getReviewStream(String reviewRequestUrl) throws IOException {
+        URL url = new URL(reviewRequestUrl);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        InputStream inputStream = urlConnection.getInputStream();
+        Scanner scanner = new Scanner(inputStream);
+        try {
+            scanner.useDelimiter("\\A");
+            boolean hasNext = scanner.hasNext();
+            if (hasNext) {
+                return scanner.next();
+            } else {
+                scanner.close();
+                return null;
+            }
+        } finally {
+            scanner.close();
+            urlConnection.disconnect();
+        }
+    }
 
+    public static void parseReviewStream(String reviewsStream) {
+        try {
+            JSONObject jsonReviewObject = new JSONObject(reviewsStream);
+            JSONArray reviewResults = jsonReviewObject.getJSONArray("results");
 
+            for (int i = 0; i < reviewResults.length() && i < 10; i++) {
+                MovieDetailActivity.reviewAuthors[i] = reviewResults.getJSONObject(i).optString("author");
+                MovieDetailActivity.reviews[i] = reviewResults.getJSONObject(i).optString("content");
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

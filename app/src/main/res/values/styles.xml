@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="HorizontalLine">HorizontalLine
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item></style>
+
 </resources>

@@ -3,6 +3,7 @@ package com.example.mymovieapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,8 +40,11 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static ArrayList<Movies> movies;
     private int position;
     public static int trailerLenght;
-    public static String[] trailerKeys = trailerNames = new String[4];
+    public static String[] trailerKeys = new String[4];
     public static String[] trailerNames = new String[4];
+
+    public static String[] reviewAuthors = new String[10];
+    public static String[] reviews = new String[10];
 
 
 
@@ -68,6 +72,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             initializeViews();
             fillDetails(position);
             new getTrailersTask().execute();
+            new getReviewsTask().execute();
 
 
 
@@ -104,6 +109,22 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    private void addReviews() {
+        final LinearLayout layoutReviewList = (LinearLayout)findViewById(R.id.llTrailerList);
+
+        for (int i = 0; i < reviews.length; i++){
+            if(reviewAuthors[i] != null) {
+                TextView tvAuthor = new TextView(this);
+                tvAuthor.setText("Author: " + reviewAuthors[i]);
+                tvAuthor.setTypeface(null, Typeface.BOLD_ITALIC);
+                tvAuthor.setTextSize(20);
+                layoutReviewList.addView(tvAuthor);
+                TextView tvReview = new TextView(this);
+                tvReview.setText(reviews[i]);
+                layoutReviewList.addView(tvReview);
+            }
+        }
+    }
 
     private void initializeViews() {
         ivPoster = findViewById(R.id.ivPoster);
@@ -150,5 +171,31 @@ public class MovieDetailActivity extends AppCompatActivity {
             addTrailers();
         }
     }
+
+
+    public class getReviewsTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            String reviewRequestUrl = NetworkUtils.createReviewrUri(String.valueOf(movies.get(position).getId()));
+            Log.d(TAG, "MyLog getReviewsTask Review ULR"
+                    + reviewRequestUrl);
+            try {
+                String reviewStream = NetworkUtils.getReviewStream(reviewRequestUrl);
+                Log.d(TAG, "MyLog getReviewsTask Review ReviewString: " + reviewStream);
+                NetworkUtils.parseReviewStream(reviewStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            addReviews();
+        }
+    }
+
 
 }

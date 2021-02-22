@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="doInBackground" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -29,7 +28,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="150d9a1f-f9ec-4145-a7d7-18b84f2aceec" name="Default Changelist" comment="" />
+    <list default="true" id="150d9a1f-f9ec-4145-a7d7-18b84f2aceec" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/horizontal_line.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MovieDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/MovieDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/NetworkUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mymovieapp/NetworkUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_movie_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +56,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -147,10 +170,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser" timestamp="1613580611320">
+    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser" timestamp="1613992605396">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser/0.0.3413.1400@0.0.3413.1400" timestamp="1613580611320" />
+    <state x="838" y="561" key="#com.intellij.ide.util.MemberChooser/0.0.3413.1400@0.0.3413.1400" timestamp="1613992605396" />
     <state x="534" y="440" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1612969710868">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
@@ -159,22 +182,34 @@
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
     <state x="1892" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3413.1400@0.0.3413.1400" timestamp="1613321707786" />
-    <state width="1660" height="355" key="GridCell.Tab.0.bottom" timestamp="1613578232716">
+    <state x="434" y="459" key="AndroidCreateResourceDirectoryDialog" timestamp="1614000006840">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state width="1660" height="355" key="GridCell.Tab.0.bottom/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
-    <state width="1660" height="355" key="GridCell.Tab.0.center" timestamp="1613578232716">
+    <state x="434" y="459" key="AndroidCreateResourceDirectoryDialog/0.0.3413.1400@0.0.3413.1400" timestamp="1614000006840" />
+    <state x="434" y="459" key="AndroidCreateResourceFileDialog" timestamp="1614002151048">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state width="1660" height="355" key="GridCell.Tab.0.center/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
-    <state width="1660" height="355" key="GridCell.Tab.0.left" timestamp="1613578232716">
+    <state x="434" y="459" key="AndroidCreateResourceFileDialog/0.0.3413.1400@0.0.3413.1400" timestamp="1614002151048" />
+    <state x="700" y="511" key="AndroidCreateXmlResourceDialog" timestamp="1614002260585">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state width="1660" height="355" key="GridCell.Tab.0.left/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
-    <state width="1660" height="355" key="GridCell.Tab.0.right" timestamp="1613578232716">
+    <state x="700" y="511" key="AndroidCreateXmlResourceDialog/0.0.3413.1400@0.0.3413.1400" timestamp="1614002260585" />
+    <state width="1660" height="400" key="GridCell.Tab.0.bottom" timestamp="1614001983443">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>
-    <state width="1660" height="355" key="GridCell.Tab.0.right/0.0.3413.1400@0.0.3413.1400" timestamp="1613578232716" />
+    <state width="1660" height="400" key="GridCell.Tab.0.bottom/0.0.3413.1400@0.0.3413.1400" timestamp="1614001983443" />
+    <state width="1660" height="400" key="GridCell.Tab.0.center" timestamp="1614001983443">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="400" key="GridCell.Tab.0.center/0.0.3413.1400@0.0.3413.1400" timestamp="1614001983443" />
+    <state width="1660" height="400" key="GridCell.Tab.0.left" timestamp="1614001983443">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="400" key="GridCell.Tab.0.left/0.0.3413.1400@0.0.3413.1400" timestamp="1614001983443" />
+    <state width="1660" height="400" key="GridCell.Tab.0.right" timestamp="1614001983443">
+      <screen x="0" y="0" width="3413" height="1400" />
+    </state>
+    <state width="1660" height="400" key="GridCell.Tab.0.right/0.0.3413.1400@0.0.3413.1400" timestamp="1614001983443" />
     <state x="523" y="319" width="672" height="678" key="search.everywhere.popup" timestamp="1613574255771">
       <screen x="0" y="0" width="3413" height="1400" />
     </state>

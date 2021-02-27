@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private MovieAdapter mAdapter;
     private RecyclerView rvMain;
     private GridLayoutManager glm;
+    private DBDatabase database;
 
     /**
      * Creates the two Menu Buttons, Top Rated and Most Popular.
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.popularmenu, menu);
         getMenuInflater().inflate(R.menu.ratedmenu, menu);
+        getMenuInflater().inflate(R.menu.favmenu, menu);
         return true;
     }
 
@@ -98,7 +100,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         glm = new GridLayoutManager(this, 2);
         rvMain.setLayoutManager(glm);
         setDisplaySize();
-        Log.d(TAG, "MyLog onCreate Postexecute " + postexecute);
+
+        database = DBSingelton.instance(this).getDatabase();
+
     }
 
     /**
@@ -148,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         startActivity(intent);
     }
 
+    public DBDatabase getDatabase() {
+        return database;
+    }
+
     /**
      * fetch_Movies create the URL, load the InformationsStream change it to JSON and save all
      * movies in an ArrayList.
@@ -191,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             onLoadFinished();
 
         }
+
+
     }
 }
 

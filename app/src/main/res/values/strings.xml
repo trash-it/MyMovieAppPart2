@@ -9,6 +9,7 @@
     <string name="tvReleaseDate">Release Date:</string>
     <string name="tvAverage">Average Vote:</string>
     <string name="tvPlot">Plot:</string>
+    <string name="menu_favorites">Favorites</string>
 
 
 </resources>

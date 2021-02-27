@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 
 
@@ -33,6 +32,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private static final String TAG = "MovieDetail";
     String textEntered;
     String[] trailers;
+    Button favButton;
 
     /**
      * The Movie Array List
@@ -45,6 +45,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     public static String[] reviewAuthors = new String[10];
     public static String[] reviews = new String[10];
+    private DBDatabase database;
+
 
 
 
@@ -71,6 +73,13 @@ public class MovieDetailActivity extends AppCompatActivity {
             position = Integer.parseInt(textEntered);
             initializeViews();
             fillDetails(position);
+            favButton = (Button)findViewById(R.id.buttonFavorites);
+            favButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View view) {
+                    onFavButtonClicked();
+                }
+            });
             new getTrailersTask().execute();
             new getReviewsTask().execute();
 
@@ -83,6 +92,18 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
+    private void onFavButtonClicked() {
+        final DBEntityFavorite favorite = new DBEntityFavorite(movies.get(position).getId(), movies.get(position).getTitle());
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                database.userDao().insertAll(favorite);
+            }
+        };
+
+        Log.d(TAG, "MyLog doInBackground onFavButtonClicked");
+
+    }
 
 
     private void addTrailers() {

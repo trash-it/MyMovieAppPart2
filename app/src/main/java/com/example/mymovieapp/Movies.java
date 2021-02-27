@@ -2,6 +2,9 @@ package com.example.mymovieapp;
 
 
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -9,8 +12,9 @@ import java.util.Arrays;
 /**
  * The type Movies.
  */
+@Entity
 public class Movies implements Serializable {
-
+    @PrimaryKey
     private  int id;
     private  String originalTitle;
     private  String title;

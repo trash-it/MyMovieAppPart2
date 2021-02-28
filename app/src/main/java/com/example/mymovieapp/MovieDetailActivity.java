@@ -1,6 +1,7 @@
 package com.example.mymovieapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -32,7 +33,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private static final String TAG = "MovieDetail";
     String textEntered;
     String[] trailers;
-    Button favButton;
+
 
     /**
      * The Movie Array List
@@ -45,7 +46,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     public static String[] reviewAuthors = new String[10];
     public static String[] reviews = new String[10];
-    private DBDatabase database;
+
+    private DBDatabase database = DBSingelton.instance(this).getDatabase();
 
 
 
@@ -60,6 +62,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView tvReleaseDate;
     private TextView tvAverage;
     private TextView tvPlot;
+    private Button favButton;
+    ArrayList<Movies> favlist;
 
 
     @Override
@@ -67,13 +71,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         Intent intentActivityStarter = getIntent();
+        favButton = (Button)findViewById(R.id.buttonFavorites);
 
         if (intentActivityStarter.hasExtra(Intent.EXTRA_TEXT)) {
             textEntered = intentActivityStarter.getStringExtra(Intent.EXTRA_TEXT);
             position = Integer.parseInt(textEntered);
             initializeViews();
+
+            MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+            favlist = new ArrayList(viewModel.getFavmovies());
+            Log.d(TAG, "MyLog aaa " + position);
             fillDetails(position);
-            favButton = (Button)findViewById(R.id.buttonFavorites);
             favButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(android.view.View view) {
@@ -92,16 +100,51 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
-    private void onFavButtonClicked() {
-        final DBEntityFavorite favorite = new DBEntityFavorite(movies.get(position).getId(), movies.get(position).getTitle());
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                database.userDao().insertAll(favorite);
-            }
-        };
+    private boolean checkIfIsFav() {
 
-        Log.d(TAG, "MyLog doInBackground onFavButtonClicked");
+        Log.d(TAG, "MyLog checkIfIsFav FavList is created and is " + favlist.size() + "long");
+         for(int i = 0; i < favlist.size(); i++) {
+             Log.d(TAG, "MyLog checkIfIsFav FavList checks");
+             if(favlist.get(i).getId() == movies.get(position).getId()){
+                 Log.d(TAG, "MyLog checkIfIsFav FavList found match");
+                return true;
+
+             }
+         }
+        return false;
+    }
+
+
+
+    private void onFavButtonClicked() {
+        if( !checkIfIsFav() ) {
+            Log.d(TAG, "MyLog onFavButtonClicked and its not fav");
+
+            final Movies favorite = new Movies(movies.get(position).getId(), movies.get(position).getTitle(),
+                    movies.get(position).getOriginalTitle(), movies.get(position).getReleaseDate(), movies.get(position).getOverview(), movies.get(position).getVoteAverage(), movies.get(position).getPosterPath());
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    database.userDao().insertAll(favorite);
+                }
+            };
+            runnable.run();
+            favButton.setText("Added to Favorites");
+            movies.get(position).setFavorite(true);
+        } else {
+            Log.d(TAG, "MyLog onFavButtonClicked and it is a fav");
+            final Movies favorite = new Movies(movies.get(position).getId(), movies.get(position).getTitle(),
+                    movies.get(position).getOriginalTitle(), movies.get(position).getReleaseDate(), movies.get(position).getOverview(), movies.get(position).getVoteAverage(), movies.get(position).getPosterPath());
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    database.userDao().delete(favorite);
+                }
+            };
+            runnable.run();
+            movies.get(position).setFavorite(false);
+            favButton.setText("Deleted from Favorites");
+        }
 
     }
 
@@ -164,7 +207,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvReleaseDate.setText(movies.get(position).getReleaseDate());
         tvAverage.setText(String.valueOf(movies.get(position).getVoteAverage()));
         tvPlot.setText(movies.get(position).getOverview());
-
+        if( checkIfIsFav()){
+            favButton.setText("In Favorites");
+            Log.d(TAG, "MyLog checkIfIsFav FavList Button changed");
+        }
     }
 
     public class getTrailersTask extends AsyncTask<String, Void, String> {

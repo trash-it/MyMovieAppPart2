@@ -1,6 +1,10 @@
 package com.example.mymovieapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,29 +13,19 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.util.Log;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The type Main activity.
@@ -48,10 +42,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private ArrayList<Movies> mactuallList;
     private ArrayList<Movies> mPopularList;
     private ArrayList<Movies> mTopTopRatedList;
+    private LiveData<Movies> favoriteMovieList;
     private MovieAdapter mAdapter;
     private RecyclerView rvMain;
     private GridLayoutManager glm;
     private DBDatabase database;
+    private String message;
+
 
     /**
      * Creates the two Menu Buttons, Top Rated and Most Popular.
@@ -69,22 +66,40 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int menuItemThatWasSelected = item.getItemId();
         Context context = MainActivity.this;
-        if (menuItemThatWasSelected == R.id.menu_Rated) {
-            String message = "Show Top Rated";
+        switch(menuItemThatWasSelected){
+            case R.id.menu_Rated:
+            message = "Show Top Rated";
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             mactuallList = mTopTopRatedList;
             reloadlist(mactuallList);
+            break;
 
-        } else {
-            String message = "Show Most Popular";
+            case R.id.menu_Popular:
+            message = "Show Most Popular";
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             mactuallList = mPopularList;
             reloadlist(mactuallList);
+            break;
+
+            case R.id.menu_fav:
+            message = "Show Favorites";
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            createFavList();
+            reloadlist(mactuallList);
+            break;
         }
         return true;
     }
+
+    private void createFavList() {
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        
+        mactuallList = new ArrayList(viewModel.getFavmovies());
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         glm = new GridLayoutManager(this, 2);
         rvMain.setLayoutManager(glm);
         setDisplaySize();
-
         database = DBSingelton.instance(this).getDatabase();
 
     }
@@ -137,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAdapter mAdapter = new MovieAdapter(list, this);
         rvMain.removeAllViewsInLayout();
         rvMain.setAdapter(mAdapter);
+
 
     }
 

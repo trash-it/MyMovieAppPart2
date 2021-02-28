@@ -24,6 +24,7 @@ public class DBSingelton {
     }
 
     public DBDatabase getDatabase(){
+
         return db;
     }
 

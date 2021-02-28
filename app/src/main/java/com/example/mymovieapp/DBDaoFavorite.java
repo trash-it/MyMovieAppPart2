@@ -1,7 +1,5 @@
 package com.example.mymovieapp;
 
-import android.graphics.Movie;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,19 +7,20 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface DBDaoFavorite {
-    @Query("Select * FROM DBEntityFavorite")
-    List<DBEntityFavorite> loadAll();
+    @Query("Select * FROM Movies")
+    List<Movies> loadAll();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(DBEntityFavorite... favorite);
+    void insertAll(Movies favorite);
 
     @Update
-    void updateAll(DBEntityFavorite... favorite);
+    void updateAll(Movies... favorite);
 
     @Delete
-    void delete(DBEntityFavorite... favorite);
+    void delete(Movies... favorite);
 }

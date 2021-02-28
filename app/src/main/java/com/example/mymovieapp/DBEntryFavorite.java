@@ -14,7 +14,7 @@ import java.util.Arrays;
  * The type Movies.
  */
 @Entity
-public class Movies implements Serializable {
+public class DBEntryFavorite  {
     @PrimaryKey
     private  int id;
     private  String originalTitle;
@@ -23,14 +23,9 @@ public class Movies implements Serializable {
     private  String releaseDate;
     private  String posterPath;
     private  int voteAverage;
-    private boolean favorite = false;
-
-    public Movies(){
-
-    }
 
 
-    public Movies(int id,  String title, String originalTitle, String releaseDate, String overview, int voteAverage, String posterPath){
+    public DBEntryFavorite(int id,  String title, String originalTitle, String releaseDate, String overview, int voteAverage){
         this.id = id;
         //this.movieKey = movieKey;
         this. title  = title;
@@ -38,7 +33,6 @@ public class Movies implements Serializable {
         this.releaseDate = releaseDate;
         this.overview = overview;
         this.voteAverage = voteAverage;
-        this.posterPath = posterPath;
 
     }
 
@@ -155,11 +149,8 @@ public class Movies implements Serializable {
     }
 
 
-    public void setFavorite(boolean b) {
-        favorite = b;
-    }
 
-    public boolean getFavorite(){
-        return favorite;
-    }
+
+
+
 }

@@ -73,7 +73,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         Intent intentActivityStarter = getIntent();
         favButton = (Button)findViewById(R.id.buttonFavorites);
 
-        if (intentActivityStarter.hasExtra(Intent.EXTRA_TEXT)) {
+        if (intentActivityStarter.hasExtra(Intent.EXTRA_TEXT) && (movies.size() > 0 )) {
             textEntered = intentActivityStarter.getStringExtra(Intent.EXTRA_TEXT);
             position = Integer.parseInt(textEntered);
             initializeViews();
@@ -101,14 +101,16 @@ public class MovieDetailActivity extends AppCompatActivity {
     private boolean checkIfIsFav() {
 
         Log.d(TAG, "MyLog checkIfIsFav FavList is created and is " + favlist.size() + "long");
+        if(favlist.size() != 0 ){
          for(int i = 0; i < favlist.size(); i++) {
              Log.d(TAG, "MyLog checkIfIsFav FavList checks");
              if(favlist.get(i).getId() == movies.get(position).getId()){
                  Log.d(TAG, "MyLog checkIfIsFav FavList found match");
                 return true;
-
              }
-         }
+
+         }}
+
         return false;
     }
 
@@ -128,7 +130,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             };
             runnable.run();
-            favButton.setText("Added to Favorites");
+            favButton.setText("Favorite");
             movies.get(position).setFavorite(true);
         } else {
             Log.d(TAG, "MyLog onFavButtonClicked and it is a fav");
@@ -141,7 +143,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             };
             runnable.run();
-            movies.remove(position);
+            movies.get(position).setFavorite(false);
             favButton.setText("Deleted from Favorites");
         }
 
@@ -200,7 +202,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void fillDetails(int position) {
-        Log.d(TAG, "MyLog fillDetails MOVIE Position: " + position + "Movies ID: " + movies.get(position).getId() + movies.get(position).getOriginalTitle());
+       // Log.d(TAG, "MyLog fillDetails MOVIE Position: " + position + "Movies ID: " + movies.get(position).getId() + movies.get(position).getOriginalTitle());
         Picasso.get().load(MOVIE_BASE_URL + movies.get(position).getPosterPath()).placeholder(R.drawable.noimage).resize(200, 300).into(ivPoster);
         tvTitle.setText(movies.get(position).getTitle());
         tvOriginalTitle.setText(movies.get(position).getOriginalTitle());

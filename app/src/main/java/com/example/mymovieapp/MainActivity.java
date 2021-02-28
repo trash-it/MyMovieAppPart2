@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private GridLayoutManager glm;
     private DBDatabase database;
     private String message;
+    private boolean favExist = false;
 
 
     /**
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             mactuallList = mTopTopRatedList;
             reloadlist(mactuallList);
+                favExist = false;
             break;
 
             case R.id.menu_Popular:
@@ -79,16 +81,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             mactuallList = mPopularList;
             reloadlist(mactuallList);
+                favExist = false;
             break;
 
             case R.id.menu_fav:
+                if(favoriteMovieList != null && (favoriteMovieList.size() != 0)) {
             message = "Show Favorites";
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             createFavList();
             mactuallList = favoriteMovieList;
             reloadlist(mactuallList);
-
-             break;
+                    favExist = true;
+            }
+            break;
         }
         return true;
     }
@@ -98,22 +103,30 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         viewModel.getLiveFavmovies().observe(MainActivity.this, new Observer<List<Movies>>() {
             @Override
             public void onChanged(List<Movies> movies) {
-                // reloadlist((ArrayList<Movies>) movies);
+                if (favExist) {
+                    Log.d(TAG, "MyLog onChanged: hit");
+                    reloadlist((ArrayList<Movies>) movies);
+                }
                 favoriteMovieList = (ArrayList<Movies>) movies;
+                // mactuallList = favoriteMovieList;
 
             }
         });
+            }
 
-        favoriteMovieList = viewModel.getFavMovies();
-    }
+
 
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onResume() {
+        Log.d(TAG, "MyLog onResume: ");
+        super.onResume();
+        if(mactuallList != null){
+            Log.d(TAG, "MyLog onResume2: ");
+            createFavList();
+            reloadlist(mactuallList);
+        }
 
-        createFavList();
-        reloadlist(favoriteMovieList);
     }
 
     @Override
@@ -156,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onLoadFinished() {
         mAdapter = new MovieAdapter(mactuallList, this);
         rvMain.setAdapter(mAdapter);
+        createFavList();
     }
 
     /**
@@ -216,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Log.d(TAG, "MyLog doInBackground: parseMovieJson  size Popui"
                     + mPopularList.size());
             mactuallList = mPopularList;
+
             return "";
         }
 

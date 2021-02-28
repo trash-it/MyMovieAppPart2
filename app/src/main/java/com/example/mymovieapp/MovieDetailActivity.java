@@ -78,7 +78,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             position = Integer.parseInt(textEntered);
             initializeViews();
 
-            MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+            DetailViewModel viewModel = new ViewModelProvider(this).get(DetailViewModel.class);
             favlist = new ArrayList(viewModel.getFavmovies());
             Log.d(TAG, "MyLog aaa " + position);
             fillDetails(position);
@@ -90,8 +90,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             });
             new getTrailersTask().execute();
             new getReviewsTask().execute();
-
-
 
         } else {
             Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
@@ -126,6 +124,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     database.userDao().insertAll(favorite);
+                    Log.d(TAG, "MyLog onFavButtonClicked added Movie: " + movies.get(position).getOriginalTitle());
                 }
             };
             runnable.run();
@@ -142,7 +141,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             };
             runnable.run();
-            movies.get(position).setFavorite(false);
+            movies.remove(position);
             favButton.setText("Deleted from Favorites");
         }
 
@@ -201,6 +200,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     private void fillDetails(int position) {
+        Log.d(TAG, "MyLog fillDetails MOVIE Position: " + position + "Movies ID: " + movies.get(position).getId() + movies.get(position).getOriginalTitle());
         Picasso.get().load(MOVIE_BASE_URL + movies.get(position).getPosterPath()).placeholder(R.drawable.noimage).resize(200, 300).into(ivPoster);
         tvTitle.setText(movies.get(position).getTitle());
         tvOriginalTitle.setText(movies.get(position).getOriginalTitle());

@@ -1,8 +1,6 @@
 package com.example.mymovieapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,9 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * The type Main activity.
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private ArrayList<Movies> mactuallList;
     private ArrayList<Movies> mPopularList;
     private ArrayList<Movies> mTopTopRatedList;
-    private LiveData<Movies> favoriteMovieList;
+    private ArrayList<Movies> favoriteMovieList;
     private MovieAdapter mAdapter;
     private RecyclerView rvMain;
     private GridLayoutManager glm;
@@ -88,18 +85,36 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             message = "Show Favorites";
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             createFavList();
+            mactuallList = favoriteMovieList;
             reloadlist(mactuallList);
-            break;
+
+             break;
         }
         return true;
     }
 
     private void createFavList() {
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        
-        mactuallList = new ArrayList(viewModel.getFavmovies());
+        viewModel.getLiveFavmovies().observe(MainActivity.this, new Observer<List<Movies>>() {
+            @Override
+            public void onChanged(List<Movies> movies) {
+                // reloadlist((ArrayList<Movies>) movies);
+                favoriteMovieList = (ArrayList<Movies>) movies;
+
+            }
+        });
+
+        favoriteMovieList = viewModel.getFavMovies();
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        createFavList();
+        reloadlist(favoriteMovieList);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +131,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         rvMain.setLayoutManager(glm);
         setDisplaySize();
         database = DBSingelton.instance(this).getDatabase();
-
     }
+
+
 
     /**
      * Checks the Displaysize and give the information to the Movieadaper
@@ -140,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onLoadFinished() {
         mAdapter = new MovieAdapter(mactuallList, this);
         rvMain.setAdapter(mAdapter);
-
     }
 
     /**
@@ -151,8 +166,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAdapter mAdapter = new MovieAdapter(list, this);
         rvMain.removeAllViewsInLayout();
         rvMain.setAdapter(mAdapter);
-
-
     }
 
     /**

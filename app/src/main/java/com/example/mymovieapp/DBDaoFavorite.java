@@ -1,5 +1,6 @@
 package com.example.mymovieapp;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,7 +14,10 @@ import java.util.List;
 @Dao
 public interface DBDaoFavorite {
     @Query("Select * FROM Movies")
-    List<Movies> loadAll();
+    LiveData<List<Movies>> loadAll();
+
+    @Query("Select * FROM Movies")
+    List<Movies> loadAllDetail();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Movies favorite);

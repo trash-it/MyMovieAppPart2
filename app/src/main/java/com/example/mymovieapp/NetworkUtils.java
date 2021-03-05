@@ -20,14 +20,12 @@ import java.util.Scanner;
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
     private static String stringMovieStream;
-    ;
-
     private static final String base_url = "api.themoviedb.org";
     private static final String append_url = "3/discover/";
     private static final String api = "api_key";
 
     // Insert API Key here:
-    private static final String api_key = "3ec1e190ef0cae1bbf210e2ffd767f69";
+    private static final String api_key = "APIKEY";
 
     private static final String sort_by = "sort_by";
     private static final String page = "page";

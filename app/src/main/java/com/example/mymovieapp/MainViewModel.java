@@ -12,24 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The viewmodel for the Mainactivity
+ */
 public class MainViewModel extends AndroidViewModel {
-    //private final LiveData<ArrayList<Movies>> favmovies;
+
     private LiveData<List<Movies>> liveFavs;
     private ArrayList<Movies> favs;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         DBDatabase database = (DBSingelton.instance(this.getApplication()).getDatabase());
-       // favmovies = (LiveData<ArrayList<Movies>>) database.userDao().loadAll();
         liveFavs = (LiveData<List<Movies>>) database.userDao().loadAll();
         favs = (ArrayList<Movies>) database.userDao().loadAllDetail();
     }
 
+    /**
+     * Retuns a livedataobject from favoriteMovies
+     */
     public LiveData<List<Movies>> getLiveFavmovies() {
         return liveFavs;
-        //return favmovies;
-    }
 
+    }
+    /**
+     * Returns favoriteMovies as a List
+     */
     public ArrayList<Movies> getFavMovies(){
         return favs;
     }

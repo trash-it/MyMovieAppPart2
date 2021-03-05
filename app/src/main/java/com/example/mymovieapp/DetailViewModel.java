@@ -7,6 +7,9 @@ import androidx.lifecycle.AndroidViewModel;
 
 import java.util.ArrayList;
 
+/**
+ * The viewmodel for the DetailActivity
+ */
 
 public class DetailViewModel extends AndroidViewModel {
     private ArrayList<Movies> favs;
@@ -17,6 +20,9 @@ public class DetailViewModel extends AndroidViewModel {
         favs = (ArrayList<Movies>) database.userDao().loadAllDetail();
     }
 
+    /**
+     * returns the favoritemovie list
+     */
     public ArrayList<Movies> getFavmovies() {
         return favs;
     }

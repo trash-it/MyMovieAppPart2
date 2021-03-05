@@ -5,7 +5,9 @@ import android.util.Log;
 
 import androidx.room.Room;
 
-
+/**
+ * The Singelton which creates only one database instance
+ */
 
 public class DBSingelton {
     private static final String LOG_TAG = DBSingelton.class.getSimpleName();

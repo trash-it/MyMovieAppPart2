@@ -43,14 +43,10 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static int trailerLenght;
     public static String[] trailerKeys = new String[4];
     public static String[] trailerNames = new String[4];
-
     public static String[] reviewAuthors = new String[10];
     public static String[] reviews = new String[10];
 
     private DBDatabase database = DBSingelton.instance(this).getDatabase();
-
-
-
 
     /**
      * The constant MOVIE_BASE_URL.
@@ -98,6 +94,9 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks if selected movie is already an favorite
+     */
     private boolean checkIfIsFav() {
 
         Log.d(TAG, "MyLog checkIfIsFav FavList is created and is " + favlist.size() + "long");
@@ -115,7 +114,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * reacts when the favorite button is clicked
+     */
     private void onFavButtonClicked() {
         if( !checkIfIsFav() ) {
             Log.d(TAG, "MyLog onFavButtonClicked and its not fav");
@@ -150,6 +151,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * adds the loaded trailers to the view
+     */
     private void addTrailers() {
         final LinearLayout layoutTrailerList = (LinearLayout)findViewById(R.id.llTrailerList);
         Log.d(TAG, "MyLog doInBackground addTrailers Start" + trailerKeys.length + trailerKeys[0]);
@@ -175,6 +179,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * adds the loaded reviews to the view
+     */
     private void addReviews() {
         final LinearLayout layoutReviewList = (LinearLayout)findViewById(R.id.llreviewList);
 
@@ -192,6 +199,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * loads the variables with the views from the detailacticity
+     */
     private void initializeViews() {
         ivPoster = findViewById(R.id.ivPoster);
         tvTitle = findViewById(R.id.tvTitle);
@@ -200,7 +210,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvAverage = findViewById(R.id.tvAverage);
         tvPlot = findViewById(R.id.tvPlot);
     }
-
+    /**
+     * fills the views with the loaded informations
+     */
     private void fillDetails(int position) {
        // Log.d(TAG, "MyLog fillDetails MOVIE Position: " + position + "Movies ID: " + movies.get(position).getId() + movies.get(position).getOriginalTitle());
         Picasso.get().load(MOVIE_BASE_URL + movies.get(position).getPosterPath()).placeholder(R.drawable.noimage).resize(200, 300).into(ivPoster);
@@ -215,8 +227,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    public class getTrailersTask extends AsyncTask<String, Void, String> {
 
+    /**
+     * The asynctask which loads the trailer from the moviedatabase
+     */
+    public class getTrailersTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -242,7 +257,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * The asynctast which loads the trailers from the moviedatabase
+     */
     public class getReviewsTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {

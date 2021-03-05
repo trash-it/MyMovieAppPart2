@@ -11,7 +11,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * The type Movies.
+ * The DBFavorite which will be filled with Movie types.
  */
 @Entity
 public class DBEntryFavorite  {

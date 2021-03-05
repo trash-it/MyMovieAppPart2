@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         return true;
     }
 
+    /**
+     * Create the favoriteMoveList
+     */
     private void createFavList() {
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.getLiveFavmovies().observe(MainActivity.this, new Observer<List<Movies>>() {
@@ -116,7 +119,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
 
 
-
+    /**
+     * when the Mainactivity will be resumed that the mactuallList will be reloaded
+     */
     @Override
     protected void onResume() {
         Log.d(TAG, "MyLog onResume: ");
@@ -242,8 +247,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             onLoadFinished();
 
         }
-
-
     }
 }
 

@@ -11,6 +11,11 @@ import androidx.room.Update;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The DOA Class for ROOM Database
+ */
+
+
 @Dao
 public interface DBDaoFavorite {
     @Query("Select * FROM Movies")
